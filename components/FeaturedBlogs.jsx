@@ -1,4 +1,8 @@
+"use client"
+
 import Image from "next/image"
+import { ArrowNarrowLeftIcon, ArrowNarrowRightIcon } from '@heroicons/react/solid'
+import PaginationIndex from "./PaginationIndex"
 
 const posts = [
   {
@@ -130,11 +134,20 @@ const posts = [
   
 ]
 
-import React from 'react'
+import React, { useState } from 'react'
 
 export default function FeaturedBlogs() {
+
+  const [selected, setSelected] = useState(1)
+
+  const handleClick = (index) => {
+    setSelected(index)
+  }
+
+
   return (
-    <div className="mt-12 max-w-lg mx-auto grid gap-10 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 lg:max-w-none lg:auto-cols-min lg:grid-flow-dense">
+    <div>
+      <div className="mt-12 max-w-lg mx-auto grid gap-10 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 lg:max-w-none lg:auto-cols-min lg:grid-flow-dense">
           {posts.map((post) => (
             <div key={post.title} className="flex flex-col rounded-2xl shadow-lg overflow-hidden">
               <div className="flex-shrink-0">
@@ -175,6 +188,37 @@ export default function FeaturedBlogs() {
               </div>
             </div>
           ))}
+          <br/>
+          
         </div>
+
+        <nav className="border-t border-gray-200 px-4 flex items-center justify-between sm:px-0 mt-12">
+          <div className="-mt-px w-0 flex-1 flex">
+            <a
+              href="#"
+              className="border-t-2 border-transparent pt-4 pr-1 inline-flex items-center text-lg font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300"
+            >
+              <ArrowNarrowLeftIcon className="mr-3 h-5 w-5 text-gray-400" aria-hidden="true" />
+              Previous
+            </a>
+          </div>
+          <div className="hidden md:-mt-px md:flex">
+            {[1, 2, 3, '....', 8, 9, 10].map((pageNumber) => (
+              <div key={pageNumber} onClick={(pageNumber) => {setSelected(pageNumber)}} >
+                <PaginationIndex index={pageNumber} selected={selected} />
+              </div>
+            ))}
+          </div>
+          <div className="-mt-px w-0 flex-1 flex justify-end">
+            <a
+              href="#"
+              className="border-t-2 border-transparent pt-4 pl-1 inline-flex items-center text-lg font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300"
+            >
+              Next
+              <ArrowNarrowRightIcon className="ml-3 h-5 w-5 text-gray-400" aria-hidden="true" />
+            </a>
+          </div>
+        </nav>
+    </div>
   )
 }
