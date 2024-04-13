@@ -1,4 +1,4 @@
-import FeaturedBlogs from "@/components/FeaturedBlogs"
+import FeedPosts from "@/components/FeedPosts"
 
 export default function Feed() {
     return (
@@ -13,7 +13,7 @@ export default function Feed() {
               Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsa libero labore natus atque, ducimus sed.
             </p>
           </div>
-          <FeaturedBlogs />
+          <FeedPosts />
         </div>
       </div>
     )
